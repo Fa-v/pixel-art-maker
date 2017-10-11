@@ -14,11 +14,15 @@ function submitGridSize() {
     let rows = Number ($(height).val());
     let columns = Number($(width).val());
     let color = colorInput.val();
+    makeGrid(rows, columns);
   });
 }
 
-function makeGrid() {
-
-  // Your code goes here!
-
-  }
+function makeGrid(rows, columns) {
+  for (let i = 0; i < rows; i++) {
+    let row = $('<tr></tr>').appendTo('table');
+    for (let j = 0; j < columns; j++) {
+      $('<td></td>').appendTo(row);
+    };
+  };
+}
