@@ -1,19 +1,23 @@
 $(document).ready(submitGridSize);
 
 // Select color input
-const colorInput = $('input[type=color]');
+const $colorInput = $('input[type=color]');
 
 // Select size input
-const height = $('input[type=number][name=height]');
-const width = $('input[type=number][name=width]');
+const $height = $('input[type=number][name=height]');
+const $width = $('input[type=number][name=width]');
+const $submitButton = $('#submit-button');
 
 // When size is submitted by the user, call makeGrid()
 function submitGridSize() {
-  $('#button').click(function (event) {
+  $submitButton.click(function (event) {
+    let rows = Number ($height.val());
+    let columns = Number($width.val());
+
     event.preventDefault();
-    let rows = Number ($(height).val());
-    let columns = Number($(width).val());
+
     makeGrid(rows, columns);
+    toggleSubmit();
   });
 }
 
@@ -27,22 +31,28 @@ function makeGrid(rows, columns) {
 }
 
 //Adding event listeners to table
-$('table').on('click', 'td', paint);
+$('#pixel-canvas').on('click', 'td', paint);
 
 //apply color to a cell as background property
 function paint() {
-  let color = colorInput.val();
+  let color = $colorInput.val();
   $(this).css('background-color', color);
 }
 
 //Clear colors on the table
-$('#clear').click(function () {
+$('#clear').click(function (event) {
   event.preventDefault();
-  $('table td').css('background-color', 'white');
+  $('#pixel-canvas').find('td').css('background-color', 'white');
 });
 
 //Remove table
-$('#removeTable').click(function () {
+$('#remove-table').click(function (event) {
   event.preventDefault();
-  $('#pixel_canvas').find('tbody').remove();
+  $('#pixel-canvas').find('tbody').remove();
+  toggleSubmit();
 });
+
+function toggleSubmit() {
+  let toggleState = !$submitButton.prop('disabled');
+  $submitButton.prop('disabled', toggleState);
+}
