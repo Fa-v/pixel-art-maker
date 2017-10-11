@@ -34,3 +34,15 @@ function paint() {
   let color = colorInput.val();
   $(this).css('background-color', color);
 }
+
+//Clear colors on the table
+$('#clear').click(function () {
+  event.preventDefault();
+  $('table td').css('background-color', 'white');
+});
+
+//Remove table
+$('#removeTable').click(function () {
+  event.preventDefault();
+  $('tr td').remove();
+});
