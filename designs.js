@@ -13,7 +13,6 @@ function submitGridSize() {
     event.preventDefault();
     let rows = Number ($(height).val());
     let columns = Number($(width).val());
-    let color = colorInput.val();
     makeGrid(rows, columns);
   });
 }
@@ -25,4 +24,13 @@ function makeGrid(rows, columns) {
       $('<td></td>').appendTo(row);
     };
   };
+}
+
+//Adding event listeners to table
+$('table').on('click', 'td', paint);
+
+//apply color to a cell as background property
+function paint() {
+  let color = colorInput.val();
+  $(this).css('background-color', color);
 }
