@@ -44,5 +44,5 @@ $('#clear').click(function () {
 //Remove table
 $('#removeTable').click(function () {
   event.preventDefault();
-  $('tr td').remove();
+  $('#pixel_canvas').find('tbody').remove();
 });
