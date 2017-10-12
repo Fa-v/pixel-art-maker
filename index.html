@@ -1,32 +1,33 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Pixel Art Maker!</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Monoton">
     <link rel="stylesheet" href="styles.css">
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 </head>
 <body>
-    <h1>Lab: Pixel Art Maker</h1>
+    <h1 class="title">Pixel Art Maker</h1>
 
-    <h2>Choose Grid Size</h2>
-    <form id="sizePicker">
-        Grid Height:
-        <input type="number" id="input-height" name="height" min="1" value="1">
-        Grid Width:
-        <input type="number" id="input-width" name="width" min="1" value="1">
-        <button type="submit" id='submit-button'>Submit</button>
+    <h2 class="subtitle">Choose Grid Size</h2>
+    <form id="size-picker">
+        <span class="input-name">Grid Height:</span>
+        <input type="number" id="input-height" name="height" class="size-values" min="1" value="1">
+        <span class="input-name">Grid Width:</span>
+        <input type="number" id="input-width" name="width" class="size-values" min="1" value="1">
     </form>
-    <div class="buttons">
-        <button type="button" id="clear">Clear color</button>
-        <button type="button" id="remove-table">Delete Table</button>
-    </div>
+    <button type="submit" id='submit-button' class="buttons submit">Create Grid</button>
+    <button type="button" id="clear" class="buttons clear">Clear color</button>
+    <button type="button" id="remove-table" class="buttons delete">Delete Table</button>
 
-    <h2>Pick A Color</h2>
+    <h2 class="subtitle">Pick A Color</h2>
     <input type="color" id="color-picker">
 
-    <h2>Design Canvas</h2>
-    <table id="pixel-canvas"></table>
+    <h2 class="subtitle">Design Canvas</h2>
+    <table id="pixel-canvas" class="table"></table>
 
     <script src="designs.js"></script>
 </body>
