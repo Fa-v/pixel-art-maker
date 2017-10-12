@@ -1,14 +1,15 @@
 $(document).ready(submitGridSize);
 
-// Select color input
+// DOM selectors
 const $colorInput = $('input[type=color]');
-
-// Select size input
 const $height = $('input[type=number][name=height]');
 const $width = $('input[type=number][name=width]');
 const $submitButton = $('#submit-button');
 
-// When size is submitted by the user, call makeGrid()
+/**
+ * @description Takes the input values for height and width,
+ * invokes makeGrid and disables submit button
+ */
 function submitGridSize() {
   $submitButton.click(function (event) {
     let rows = Number ($height.val());
@@ -21,6 +22,11 @@ function submitGridSize() {
   });
 }
 
+/**
+ * @description Creates grid
+ * @param {number} rows
+ * @param {number} columns
+ */
 function makeGrid(rows, columns) {
   for (let i = 0; i < rows; i++) {
     let row = $('<tr></tr>').appendTo('table');
@@ -30,28 +36,41 @@ function makeGrid(rows, columns) {
   };
 }
 
-//Adding event listeners to table
+/**
+ * @description Adds click event listeners to table and
+ * calls paint event handler
+ */
 $('#pixel-canvas').on('click', 'td', paint);
 
-//apply color to a cell as background property
+
+/**
+ * @description Applies color to a cell as a background property
+ */
 function paint() {
   let color = $colorInput.val();
   $(this).css('background-color', color);
 }
 
-//Clear colors on the table
+/**
+ * @description Clears colors on the table
+ */
 $('#clear').click(function (event) {
   event.preventDefault();
   $('#pixel-canvas').find('td').css('background-color', 'white');
 });
 
-//Remove table
+/**
+ * @description Removes table from DOM
+ */
 $('#remove-table').click(function (event) {
   event.preventDefault();
   $('#pixel-canvas').find('tbody').remove();
   toggleSubmit();
 });
 
+/**
+ * @description Toggles disabled attribute on submit button
+ */
 function toggleSubmit() {
   let toggleState = !$submitButton.prop('disabled');
   $submitButton.prop('disabled', toggleState);
