@@ -42,7 +42,6 @@ function makeGrid(rows, columns) {
  */
 $('#pixel-canvas').on('click', 'td', paint);
 
-
 /**
  * @description Applies color to a cell as a background property
  */
