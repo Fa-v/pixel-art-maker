@@ -5,15 +5,25 @@ const $colorInput = $('input[type=color]');
 const $height = $('input[type=number][name=height]');
 const $width = $('input[type=number][name=width]');
 const $submitButton = $('#submit-button');
+const $sizePicker = $('#size-picker');
 
 /**
  * @description Takes the input values for height and width,
- * invokes makeGrid and disables submit button
+ * validates them, invokes makeGrid
+ * and disables submit button
  */
 function submitGridSize() {
+  $('#alert').hide();
   $submitButton.click(function (event) {
-    let rows = Number ($height.val());
-    let columns = Number($width.val());
+    let rows = $height.val();
+    let columns = $width.val();
+
+    if ((rows > 50 || rows <= 0 ) || (columns > 50 || columns <= 0)) {
+      $('#alert').text('Enter values between 1 and 50').show().fadeOut(1000);
+      return;
+    } else {
+      $sizePicker.submit(rows, columns);
+    }
 
     event.preventDefault();
 
@@ -23,7 +33,7 @@ function submitGridSize() {
 }
 
 /**
- * @description Creates grid
+ * @description Creates grid, add a click event to each cell and calls paint function
  * @param {number} rows
  * @param {number} columns
  */
@@ -31,16 +41,11 @@ function makeGrid(rows, columns) {
   for (let i = 0; i < rows; i++) {
     let row = $('<tr></tr>').appendTo('table');
     for (let j = 0; j < columns; j++) {
-      $('<td></td>').appendTo(row);
+      let cell = $('<td></td>').appendTo(row);
+      cell.on('click', paint);
     };
   };
 }
-
-/**
- * @description Adds click event listeners to table and
- * calls paint event handler
- */
-$('#pixel-canvas').on('click', 'td', paint);
 
 /**
  * @description Applies color to a cell as a background property
